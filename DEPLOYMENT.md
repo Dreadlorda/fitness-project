@@ -1,42 +1,14 @@
 
 # Deployment Instructions
 
-## Using Docker
-1. Build the Docker image:
+1. **Build Docker Image**:
    ```bash
-   docker build -t fitness-tracker .
+   docker build -t fitness_tracker_app .
    ```
 
-2. Run the Docker container:
+2. **Run Docker Container**:
    ```bash
-   docker run -p 8000:8000 fitness-tracker
+   docker run -p 8000:8000 fitness_tracker_app
    ```
 
-## Without Docker
-1. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-2. Set environment variables for production in a `.env` file:
-   ```env
-   DEBUG=False
-   SECRET_KEY=your-production-secret-key
-   ALLOWED_HOSTS=yourdomain.com,localhost
-   DATABASE_URL=postgres://username:password@hostname:port/databasename
-   ```
-
-3. Collect static files:
-   ```bash
-   python manage.py collectstatic --noinput
-   ```
-
-4. Run database migrations:
-   ```bash
-   python manage.py migrate
-   ```
-
-5. Start the server:
-   ```bash
-   gunicorn fitness_project.wsgi:application --bind 0.0.0.0:8000
-   ```
+3. Access the app at `http://localhost:8000`.

@@ -1,0 +1,8 @@
+
+{% extends 'base.html' %}
+{% block content %}
+<h2>Your Analytics</h2>
+<p>Total Meals Logged: {{ total_meals }}</p>
+<p>Average Calories: {{ average_calories|default:"N/A" }}</p>
+<p>Total Workouts: {{ total_workouts }}</p>
+{% endblock %}

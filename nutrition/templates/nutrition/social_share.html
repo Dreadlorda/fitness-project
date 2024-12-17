@@ -1,0 +1,10 @@
+
+{% extends 'base.html' %}
+{% block content %}
+<h2>Share Your Progress</h2>
+<p>Share your achievements with friends!</p>
+<ul>
+    <li><a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">Share on Facebook</a></li>
+    <li><a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text=Check+out+my+progress!">Share on Twitter</a></li>
+</ul>
+{% endblock %}
