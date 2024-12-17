@@ -13,7 +13,7 @@ class NutritionLogUpdateForm(forms.ModelForm):
         fields = ['meal', 'calories', 'protein', 'carbs', 'fat']
 
 class SearchNutritionLogForm(forms.Form):
-    search_term = forms.CharField(max_length=100, required=False, label="Search Meal")
+    search_term = forms.CharField(max_length=100, required=False, label="Sea...
 
 class UserProfileForm(forms.Form):
     first_name = forms.CharField(max_length=30, required=True)

@@ -1,0 +1,51 @@
+
+openapi: 3.0.0
+info:
+  title: Fitness Tracker API
+  description: API documentation for the Fitness Tracker project.
+  version: 1.0.0
+servers:
+  - url: http://localhost:8000/api/
+paths:
+  /achievements/:
+    get:
+      summary: Retrieve a list of achievements.
+      responses:
+        200:
+          description: A list of achievements.
+    post:
+      summary: Create a new achievement.
+      responses:
+        201:
+          description: Achievement created successfully.
+  /achievements/{id}/:
+    get:
+      summary: Retrieve a single achievement by ID.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: ID of the achievement.
+      responses:
+        200:
+          description: Achievement details retrieved successfully.
+    put:
+      summary: Update an achievement.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: ID of the achievement.
+      responses:
+        200:
+          description: Achievement updated successfully.
+    delete:
+      summary: Delete an achievement.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: ID of the achievement.
+      responses:
+        204:
+          description: Achievement deleted successfully.

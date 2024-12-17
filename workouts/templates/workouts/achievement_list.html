@@ -1,0 +1,13 @@
+
+{% extends 'base.html' %}
+{% block content %}
+<h2>Achievements</h2>
+<ul>
+    {% for achievement in achievements %}
+        <li>{{ achievement.title }} - {{ achievement.awarded_to }} ({{ achievement.awarded_at }})</li>
+        <a href="{% url 'achievement_update' achievement.pk %}">Edit</a>
+        <a href="{% url 'achievement_delete' achievement.pk %}">Delete</a>
+    {% endfor %}
+</ul>
+<a href="{% url 'achievement_create' %}">Add New Achievement</a>
+{% endblock %}

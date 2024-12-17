@@ -10,7 +10,7 @@ class CustomUser(AbstractUser):
         validators=[
             RegexValidator(
                 regex=r'^[a-zA-Z0-9_-]+$',
-                message='Username can only contain letters, numbers, "-", and "_".',
+                message='Username can only contain letters, numbers, "-", an...
                 code='invalid_username'
             )
         ],

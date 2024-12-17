@@ -1,3 +1,4 @@
+from django.views.decorators.csrf import csrf_protect
 
 from pathlib import Path
 import os
@@ -50,10 +51,10 @@ TEMPLATES = [
 WSGI_APPLICATION = 'fitness_project.wsgi.application'
 
 AUTH_PASSWORD_VALIDATORS = [
-    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarit...
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator...
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidato...
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidat...
 ]
 
 LANGUAGE_CODE = 'en-us'
@@ -77,12 +78,12 @@ CACHES = {
 # WhiteNoise for Static File Compression
 INSTALLED_APPS.append('whitenoise.runserver_nostatic')
 MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStora...
 
 AUTH_USER_MODEL = 'users.CustomUser'
 
 # Static files optimization using Whitenoise
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStora...
 
 # Caching setup
 CACHE_MIDDLEWARE_ALIAS = 'default'
@@ -92,7 +93,35 @@ CACHE_MIDDLEWARE_KEY_PREFIX = ''
 # Security enhancements
 SECURE_CONTENT_TYPE_NOSNIFF = True
 SECURE_BROWSER_XSS_FILTER = True
-SECURE_SSL_REDIRECT = True  # Enforce HTTPS
+SECURE_SSL_REDIRECT = True
 SECURE_HSTS_SECONDS = 31536000  # 1 year
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
+
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.yourdomain.com']
+
+# PostgreSQL Database Configuration
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "fitness_project",
+        "USER": "postgres",
+        "PASSWORD": "nqmatakava",
+        "HOST": "localhost",
+        "PORT": "5432",
+    }
+}
+
+import environ
+
+# Initialize environment variables
+env = environ.Env()
+environ.Env.read_env()
+
+# Security Settings
+SECRET_KEY = env('SECRET_KEY')
+DEBUG = env.bool('DEBUG', default=False)
+ALLOWED_HOSTS = env('ALLOWED_HOSTS').split(',')
+
+# Database
+DATABASES = {'default': env.db()}

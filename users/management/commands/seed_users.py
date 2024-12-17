@@ -7,14 +7,14 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         users_data = [
-            {'username': 'admin', 'email': 'admin@example.com', 'password': 'Admin123!', 'is_staff': True, 'is_superuser': True},
-            {'username': 'staff', 'email': 'staff@example.com', 'password': 'Staff123!', 'is_staff': True, 'is_superuser': False},
-            {'username': 'user1', 'email': 'user1@example.com', 'password': 'User123!', 'is_staff': False, 'is_superuser': False},
-            {'username': 'user2', 'email': 'user2@example.com', 'password': 'User123!', 'is_staff': False, 'is_superuser': False},
+            {'username': 'admin', 'email': 'admin@example.com', 'password': ...
+            {'username': 'staff', 'email': 'staff@example.com', 'password': ...
+            {'username': 'user1', 'email': 'user1@example.com', 'password': ...
+            {'username': 'user2', 'email': 'user2@example.com', 'password': ...
         ]
 
         for user_data in users_data:
-            if not User.objects.filter(username=user_data['username']).exists():
+            if not User.objects.filter(username=user_data['username']).exist...
                 user = User.objects.create_user(
                     username=user_data['username'],
                     email=user_data['email'],
@@ -23,6 +23,6 @@ class Command(BaseCommand):
                 user.is_staff = user_data['is_staff']
                 user.is_superuser = user_data['is_superuser']
                 user.save()
-                self.stdout.write(f"User {user_data['username']} created successfully")
+                self.stdout.write(f"User {user_data['username']} created suc...
             else:
-                self.stdout.write(f"User {user_data['username']} already exists")
+                self.stdout.write(f"User {user_data['username']} already exi...

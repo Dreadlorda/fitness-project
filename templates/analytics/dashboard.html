@@ -1,0 +1,61 @@
+
+{% extends 'base.html' %}
+{% block content %}
+<h1>Fitness Dashboard</h1>
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card text-white bg-success mb-3">
+                <div class="card-header">Total Goals</div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ total_goals }}</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-info mb-3">
+                <div class="card-header">Total Workouts</div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ total_workouts }}</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-warning mb-3">
+                <div class="card-header">Total Progress Logs</div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ total_progress }}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% extends 'base.html' %}
+{% block content %}
+<h2>User Progress Analytics</h2>
+<canvas id="progressChart" width="400" height="200"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+const ctx = document.getElementById('progressChart').getContext('2d');
+const progressChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Goals Completed', 'Workouts', 'Achievements'],
+        datasets: [{
+            label: 'Your Progress',
+            data: [12, 19, 5],
+            backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)'],
+            borderColor: ['rgba(75, 192, 192, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)'],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: { beginAtZero: true }
+        }
+    }
+});
+</script>
+{% endblock %}

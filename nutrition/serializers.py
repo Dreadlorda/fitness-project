@@ -1,6 +1,6 @@
 
 from rest_framework import serializers
-from .models import NutritionLog
+from nutrition.models import NutritionLog
 
 class NutritionLogSerializer(serializers.ModelSerializer):
     class Meta:

@@ -6,9 +6,9 @@ from .models import NutritionLog
 
 class NutritionLogTestCase(TestCase):
     def setUp(self):
-        self.user = User.objects.create_user(username="testuser", password="testpass")
+        self.user = User.objects.create_user(username="testuser", password="...
         self.nutrition_log = NutritionLog.objects.create(
-            user=self.user, meal="Breakfast", calories=400, protein=20, carbs=50, fat=10
+            user=self.user, meal="Breakfast", calories=400, protein=20, carb...
         )
 
     def test_nutrition_log_creation(self):

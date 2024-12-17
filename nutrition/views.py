@@ -9,7 +9,7 @@ class AnalyticsView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['total_meals'] = NutritionLog.objects.filter(user=self.request.user).count()
-        context['average_calories'] = NutritionLog.objects.filter(user=self.request.user).aggregate(Avg('calories'))['calories__avg']
-        context['total_workouts'] = ProgressLog.objects.filter(user=self.request.user).count()
+        context['total_meals'] = NutritionLog.objects.filter(user=self.reque...
+        context['average_calories'] = NutritionLog.objects.filter(user=self....
+        context['total_workouts'] = ProgressLog.objects.filter(user=self.req...
         return context

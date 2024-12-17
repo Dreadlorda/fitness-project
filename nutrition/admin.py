@@ -12,11 +12,11 @@ class NutritionLogAdmin(admin.ModelAdmin):
         import csv
         from django.http import HttpResponse
         response = HttpResponse(content_type='text/csv')
-        response['Content-Disposition'] = 'attachment; filename="nutrition_logs.csv"'
+        response['Content-Disposition'] = 'attachment; filename="nutrition_l...
         writer = csv.writer(response)
         writer.writerow(['Name', 'Calories', 'User', 'Created At'])
         for log in queryset:
-            writer.writerow([log.name, log.calories, log.user.username, log.created_at])
+            writer.writerow([log.name, log.calories, log.user.username, log....
         return response
 
     export_to_csv.short_description = "Export selected logs to CSV"

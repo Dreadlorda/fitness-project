@@ -10,7 +10,7 @@ class RoleRequiredMixin(UserPassesTestMixin):
         elif self.role == 'staff':
             return self.request.user.is_staff
         elif self.role == 'user':
-            return self.request.user.is_authenticated and not self.request.user.is_staff
+            return self.request.user.is_authenticated and not self.request.u...
         return False
 
 class AuthRequiredMixin(LoginRequiredMixin):

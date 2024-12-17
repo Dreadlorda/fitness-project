@@ -1,6 +1,6 @@
 
 from rest_framework import serializers
-from .models import Workout
+from workouts.models import Workout
 
 class WorkoutSerializer(serializers.ModelSerializer):
     class Meta:
