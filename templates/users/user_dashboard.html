@@ -1,1 +1,6 @@
-<h1>User Dashboard</h1><p>Welcome, {{ user.username }}</p>
+
+{% extends 'base.html' %}
+{% block content %}
+<h2>User Dashboard</h2>
+<p>Welcome, {{ user.username }}! This is your user dashboard.</p>
+{% endblock %}

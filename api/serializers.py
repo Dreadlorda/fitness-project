@@ -1,6 +1,6 @@
 
 from rest_framework import serializers
-from workouts.models import Achievement
+from fitness_project.core.workouts.models import Achievement
 
 class AchievementSerializer(serializers.ModelSerializer):
     class Meta:

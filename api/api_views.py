@@ -1,9 +1,9 @@
 
-from nutrition.models import NutritionLog
-from workouts.models import Workout
+from fitness_project.core.nutrition.models import NutritionLog
+from fitness_project.core.workouts.models import Workout
 from rest_framework import viewsets, permissions
-from nutrition.serializers import NutritionLogSerializer
-from workouts.serializers import WorkoutSerializer
+from fitness_project.core.nutrition.serializers import NutritionLogSerializer
+from fitness_project.core.workouts.serializers import WorkoutSerializer
 
 class WorkoutViewSet(viewsets.ModelViewSet):
     queryset = Workout.objects.all()
@@ -22,8 +22,8 @@ class NutritionLogViewSet(viewsets.ModelViewSet):
         return self.queryset.filter(user=self.request.user)
 
 from rest_framework import viewsets
-from .models import Achievement
-from .serializers import AchievementSerializer
+from fitness_project.core.workouts.models import Achievement
+from fitness_project.core.workouts.serializers import AchievementSerializer
 
 class AchievementViewSet(viewsets.ModelViewSet):
     queryset = Achievement.objects.all()
@@ -33,8 +33,8 @@ class AchievementViewSet(viewsets.ModelViewSet):
 from rest_framework.authentication import BaseAuthentication
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticated
-from .models import Achievement
-from .serializers import AchievementSerializer
+from fitness_project.core.workouts.models import Achievement
+from fitness_project.core.workouts.serializers import AchievementSerializer
 from rest_framework import viewsets
 
 # Simple pagination logic

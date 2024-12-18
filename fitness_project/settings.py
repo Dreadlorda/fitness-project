@@ -1,65 +1,95 @@
+import os
+from pathlib import Path
+from decouple import config
 
-# Add 'allauth' and providers in settings.py
-INSTALLED_APPS += [
+# Base directory of the project
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Security settings
+SECRET_KEY = config('SECRET_KEY', default='dummy-secret-key')
+DEBUG = config('DEBUG', cast=bool, default=True)
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='*').split(',')
+
+# Application definition
+INSTALLED_APPS = [
+    'fitness_project.core.workouts',
+    'fitness_project.core.goals',
+    'fitness_project.core.nutrition',
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    # Project-specific apps
+    'users',
+    # Third-party apps
     'django.contrib.sites',
+    'rest_framework',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.google',
 ]
 
-# SITE_ID configuration
-SITE_ID = 1
-
-# Authentication backends
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
-# Redirects
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
+ROOT_URLCONF = 'fitness_project.urls'
 
-# Social account providers
-SOCIALACCOUNT_PROVIDERS = {
-    'google': {
-        'SCOPE': ['profile', 'email'],
-        'AUTH_PARAMS': {'access_type': 'online'},
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [BASE_DIR / 'templates'],  # Ensure this points to your templates directory
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
     },
-        'SCOPE': ['user_profile', 'user_media'],
-        'AUTH_PARAMS': {'auth_type': 'rerequest'},
+]
+
+
+WSGI_APPLICATION = 'fitness_project.wsgi.application'
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "fitness_tracker",
+        "USER": "postgres",
+        "PASSWORD": "nqmatakava",
+        "HOST": "localhost",
+        "PORT": "5432",
     }
 }
 
-# URLs for allauth
-urlpatterns += [
-    path('accounts/', include('allauth.urls')),
+AUTH_PASSWORD_VALIDATORS = [
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-# Email Backend Configuration (for sending notifications)
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'your-email@gmail.com'  # Replace with your email
-EMAIL_HOST_PASSWORD = 'your-email-password'  # Replace with your password
+LANGUAGE_CODE = 'en-us'
+TIME_ZONE = 'UTC'
+USE_I18N = True
+USE_L10N = True
+USE_TZ = True
 
-# Celery Configuration
-CELERY_BROKER_URL = 'redis://localhost:6379/0'
-CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
-CELERY_ACCEPT_CONTENT = ['json']
-CELERY_TASK_SERIALIZER = 'json'
-CELERY_TIMEZONE = 'UTC'
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# Celery Beat Scheduler
-INSTALLED_APPS += ['django_celery_beat']
-
-from celery.schedules import crontab
-
-CELERY_BEAT_SCHEDULE = {
-    'send-daily-goal-reminders': {
-        'task': 'workouts.tasks.send_goal_reminder',
-        'schedule': crontab(hour=8, minute=0),  # Runs daily at 8 AM
-    },
-}
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

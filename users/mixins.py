@@ -5,12 +5,17 @@ class RoleRequiredMixin(UserPassesTestMixin):
     role = None  # Define 'admin', 'staff', or 'user' in views
 
     def test_func(self):
+        if not hasattr(self, 'request'):
+            return False
+        user = self.request.user
+        if user is None:
+            return False
         if self.role == 'admin':
-            return self.request.user.is_superuser
+            return user.is_superuser
         elif self.role == 'staff':
-            return self.request.user.is_staff
+            return user.is_staff
         elif self.role == 'user':
-            return self.request.user.is_authenticated and not self.request.u...
+            return user.is_authenticated and not user.is_anonymous
         return False
 
 class AuthRequiredMixin(LoginRequiredMixin):

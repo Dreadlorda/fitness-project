@@ -1,0 +1,20 @@
+<h1>Nutrition Leaderboard</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Rank</th>
+            <th>User</th>
+            <th>Total Calories</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in leaderboard %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.total_calories|default:"0" }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
