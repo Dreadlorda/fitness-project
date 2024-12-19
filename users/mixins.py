@@ -7,7 +7,7 @@ class RoleRequiredMixin(UserPassesTestMixin):
     def test_func(self):
         if not hasattr(self, 'request'):
             return False
-        user = self.request.user
+        user = getattr(self.role, 'user', None)
         if user is None:
             return False
         if self.role == 'admin':

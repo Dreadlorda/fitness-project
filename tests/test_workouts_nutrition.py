@@ -1,8 +1,8 @@
 from django.test import TestCase
 from django.urls import reverse
 from django.contrib.auth.models import User
-from fitness_project.core.nutrition.models import NutritionLog
-from fitness_project.core.workouts.models import Workout
+from nutrition.models import NutritionLog
+from workouts.models import Workout
 
 class WorkoutAndNutritionTestCase(TestCase):
     def setUp(self):

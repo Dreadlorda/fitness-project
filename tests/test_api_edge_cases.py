@@ -4,7 +4,8 @@ from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APIClient
 from django.contrib.auth.models import User
-from fitness_project.core.workouts.models import Achievement
+from users.models import Achievement
+
 
 class APITestCases(TestCase):
     def setUp(self):

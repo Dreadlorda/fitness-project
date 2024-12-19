@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse
 from django.contrib.auth.models import User
-from fitness_project.core.workouts.models import Workout
+from workouts.models import Workout
 
 class UserCRUDTests(TestCase):
     def setUp(self):
