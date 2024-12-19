@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="text-center">Your Analytics</h2>
+<div class="analytics-summary">
+    {% if total_meals > 0 %}
+        <p><strong>Total Meals Logged:</strong> {{ total_meals }}</p>
+        <p><strong>Average Calories:</strong> {{ average_calories|default:"N/A" }}</p>
+    {% else %}
+        <p>No meals logged yet. Start tracking your meals today!</p>
+    {% endif %}
+
+    {% if total_workouts > 0 %}
+        <p><strong>Total Workouts:</strong> {{ total_workouts }}</p>
+    {% else %}
+        <p>No workouts logged yet. Time to hit the gym!</p>
+    {% endif %}
+</div>
+{% endblock %}

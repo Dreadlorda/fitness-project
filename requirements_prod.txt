@@ -1,0 +1,9 @@
+#
+# Requirements for wger for production
+#
+
+# Regular packages
+-r requirements.txt
+
+psycopg[binary]==3.2.3
+django-redis==5.4.0
