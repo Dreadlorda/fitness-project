@@ -21,4 +21,3 @@ class NutritionLogAdmin(admin.ModelAdmin):
 
     export_to_csv.short_description = "Export selected logs to CSV"
 
-admin.site.register(NutritionLog, NutritionLogAdmin)

@@ -1,23 +1,10 @@
+# Admin configuration for UserProfile
 from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin
-from .models import CustomUser, Achievement
+from .models import UserProfile
 
-
-class CustomUserAdmin(UserAdmin):
-    model = CustomUser
-    fieldsets = UserAdmin.fieldsets + (
-        ('Additional Info', {'fields': ('age', 'bio')}),
-    )
-    add_fieldsets = UserAdmin.add_fieldsets + (
-        ('Additional Info', {'fields': ('age', 'bio')}),
-    )
-
-admin.site.register(CustomUser, CustomUserAdmin)
-
-@admin.register(Achievement)
-class AchievementAdmin(admin.ModelAdmin):
-    list_display = ('title', 'awarded_to', 'awarded_at')
-    list_filter = ('awarded_at', 'awarded_to')
-    search_fields = ('title', 'awarded_to__username')
-    ordering = ('-awarded_at',)
-
+@admin.register(UserProfile)
+class UserProfileAdmin(admin.ModelAdmin):
+    list_display = ('user', 'role', 'bio')
+    search_fields = ('user__username', 'role')
+    list_filter = ('role',)
+    ordering = ('user',)

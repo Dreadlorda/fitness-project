@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <h1 class="mt-4">Workouts</h1>
+
+    {% if workouts %}
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Sets</th>
+                        <th>Reps</th>
+                        <th>Duration</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for workout in workouts %}
+                        <tr>
+                            <td>{{ workout.exercise_type }}</td>
+                            <td>{{ workout.sets }}</td>
+                            <td>{{ workout.reps }}</td>
+                            <td>{{ workout.duration }}</td>
+                            <td>{{ workout.date|date:"F j, Y" }}</td> <!-- Date formatted -->
+                            <td>
+                                <a href="{% url 'workout-update' workout.id %}" class="btn btn-sm btn-warning">Edit</a>
+                                <a href="{% url 'workout-delete' workout.id %}" class="btn btn-sm btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <p class="text-muted">No workouts available.</p>
+    {% endif %}
+
+    <a href="{% url 'workout-create' %}" class="btn btn-primary">Add New Workout</a>
+</div>
+
+{% endblock %}

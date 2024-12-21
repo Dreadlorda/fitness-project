@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Welcome to Project Fitness{% endblock %}
+
+{% block content %}
+<div class="container text-center">
+    <h1 class="display-6">Project Fitness</h1> <!-- Slightly smaller main heading -->
+    <p class="lead">Your ultimate platform for achieving your fitness goals.</p>
+    <hr class="my-4">
+    <p>
+        At Project Fitness, we understand that every fitness journey is unique. That’s why we’ve built a platform that adapts to your personal needs. 
+        Whether you want to create a structured workout plan, monitor your daily calorie intake, or set meaningful goals, we’ve got you covered.
+    </p>
+    <p>
+        With our tools, you can:
+    </p>
+    <ul class="list-unstyled">
+        <li><strong>Track your progress:</strong> Monitor your workouts and nutrition with detailed reports and insights.</li>
+        <li><strong>Set achievable goals:</strong> Break down your fitness objectives into manageable steps.</li>
+        <li><strong>Stay motivated:</strong> Get tips, reminders, and support from a community of like-minded individuals.</li>
+    </ul>
+    <p>
+        Ready to take the next step? Explore our features:
+    </p>
+    <div class="d-flex justify-content-center">
+        <a href="/workouts/" class="btn btn-primary btn-lg mx-2">Workouts</a>
+        <a href="/nutrition/" class="btn btn-secondary btn-lg mx-2">Nutrition</a>
+        <a href="/goals/" class="btn btn-success btn-lg mx-2">Set Goals</a>
+    </div>
+    <hr class="my-4">
+    <p>
+        Have questions or need guidance? Our team is here to help. Visit our <a href="/about/">About Us</a> page to learn more about our mission, 
+        or <a href="/contact/">Contact Us</a> for support.
+    </p>
+</div>
+{% endblock %}

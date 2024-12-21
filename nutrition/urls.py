@@ -1,9 +1,9 @@
-
 from django.urls import path
-from . import views
+from .views import NutritionLogListView, NutritionLogCreateView, NutritionLogUpdateView, NutritionLogDeleteView
 
 urlpatterns = [
-    path('progress/', views.ProgressLogListView.as_view(), name='progress-log'),
-    path('leaderboard/', views.LeaderboardView.as_view(), name='leaderboard'),
-    path('settings/', views.UserSettingsView.as_view(), name='user-settings'),
+    path('', NutritionLogListView.as_view(), name='nutrition-log-list'),
+    path('create/', NutritionLogCreateView.as_view(), name='nutrition-log-create'),
+    path('<int:pk>/update/', NutritionLogUpdateView.as_view(), name='nutrition-log-update'),
+    path('<int:pk>/delete/', NutritionLogDeleteView.as_view(), name='nutrition-log-delete'),
 ]

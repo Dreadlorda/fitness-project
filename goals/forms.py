@@ -4,4 +4,4 @@ from .models import Goal
 class GoalForm(forms.ModelForm):
     class Meta:
         model = Goal
-        fields = ['title', 'description', 'deadline', 'progress']
+        fields = ['title', 'description', 'goal_type', 'target', 'progress', 'deadline']

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Nutrition Logs</h1>
+
+{% if logs %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Calories</th>
+                <th>Protein</th>
+                <th>Carbs</th>
+                <th>Fat</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for log in logs %}
+                <tr>
+                    <td>{{ log.name }}</td>
+                    <td>{{ log.calories }}</td>
+                    <td>{{ log.protein }}</td>
+                    <td>{{ log.carbs }}</td>
+                    <td>{{ log.fat }}</td>
+                    <td>{{ log.date|date:"F j, Y" }}</td> <!-- Date formatted -->
+                    <td>
+                        <a href="{% url 'nutrition-log-update' log.id %}" class="btn btn-sm btn-warning">Edit</a>
+                        <a href="{% url 'nutrition-log-delete' log.id %}" class="btn btn-sm btn-danger">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p class="text-muted">No nutrition logs available.</p>
+{% endif %}
+
+<a href="{% url 'nutrition-log-create' %}" class="btn btn-primary">Add New Nutrition Log</a>
+
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Nutrition Logs{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Nutrition Logs</h2>
+    <a href="/nutrition/add/" class="btn btn-success mb-3">Add New Log</a>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Meal</th>
+                <th>Calories</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for log in logs %}
+            <tr>
+                <td>{{ log.date }}</td>
+                <td>{{ log.meal }}</td>
+                <td>{{ log.calories }}</td>
+                <td>
+                    <a href="/nutrition/{{ log.id }}/update/" class="btn btn-sm btn-warning">Edit</a>
+                    <a href="/nutrition/{{ log.id }}/delete/" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4" class="text-center">No nutrition logs found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,16 +1,14 @@
-from django.conf import settings
 from django.db import models
-from django.contrib.auth.models import User
+from django.conf import settings
 
 class Workout(models.Model):
-
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='workouts')
-    name = models.CharField(max_length=255)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    exercise_type = models.CharField(max_length=100)
+    sets = models.PositiveIntegerField()
+    reps = models.PositiveIntegerField()
     duration = models.PositiveIntegerField(help_text="Duration in minutes")
-    calories_burned = models.PositiveIntegerField()
-    date = models.DateField(auto_now_add=True)
-    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='created_workouts')
+    date = models.DateField()
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.name
+        return f"{self.exercise_type} ({self.date}) - {self.duration} min"

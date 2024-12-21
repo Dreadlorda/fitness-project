@@ -1,37 +1,39 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
-from .models import CustomUser, Profile
+from django.contrib.auth.models import User
+from .models import UserProfile, ContactMessage
 
-class UserRegisterForm(UserCreationForm):
-    email = forms.EmailField()
 
-    class Meta:
-        model = CustomUser
-        fields = ['username', 'email', 'password1', 'password2']
-
-class UserUpdateForm(forms.ModelForm):
-    email = forms.EmailField()
+class UserRegistrationForm(forms.ModelForm):
+    password1 = forms.CharField(widget=forms.PasswordInput)
+    password2 = forms.CharField(widget=forms.PasswordInput)
 
     class Meta:
-        model = CustomUser
+        model = User
         fields = ['username', 'email']
 
-class ProfileUpdateForm(forms.ModelForm):
+    def clean_password2(self):
+        password1 = self.cleaned_data.get('password1')
+        password2 = self.cleaned_data.get('password2')
+        if password1 != password2:
+            raise forms.ValidationError("Passwords do not match.")
+        return password2
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.set_password(self.cleaned_data['password1'])
+        if commit:
+            user.save()
+        return user
+
+class UserProfileForm(forms.ModelForm):
     class Meta:
-        model = Profile
-        fields = ['image']
+        model = UserProfile
+        fields = ['role', 'bio']  # Include necessary fields
+        widgets = {
+            'bio': forms.Textarea(attrs={'rows': 4, 'cols': 40}),  # Control size
+        }
 
-class UserSettingsForm(forms.Form):
-    enable_notifications = forms.BooleanField(required=False)
-    daily_calorie_goal = forms.IntegerField(min_value=0, required=False)
-
-    def save(self, user):
-        profile, created = Profile.objects.get_or_create(user=user)
-        profile.enable_notifications = self.cleaned_data['enable_notifications']
-        profile.daily_calorie_goal = self.cleaned_data['daily_calorie_goal']
-        profile.save()
-
-class ContactForm(forms.Form):
-    name = forms.CharField(max_length=100, label="Your Name")
-    email = forms.EmailField(label="Your Email")
-    message = forms.CharField(widget=forms.Textarea, label="Your Message")
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = ContactMessage
+        fields = ['name', 'email', 'subject', 'message']
